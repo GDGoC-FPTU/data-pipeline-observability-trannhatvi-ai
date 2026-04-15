@@ -1,8 +1,8 @@
 # Experiment Report: Data Quality Impact on AI Agent
 
-**Student ID:** AI20K-XXXX
-**Name:** (Dien ten cua ban)
-**Date:** (Dien ngay thuc hien)
+**Student ID:** vitrannhat@gmail.com
+**Name:** 2A202600497 - Trần Nhật Vĩ
+**Date:** 4/15/2026
 
 ---
 
@@ -12,8 +12,8 @@ Chay `agent_simulation.py` voi 2 bo du lieu va ghi lai ket qua:
 
 | Scenario | Agent Response | Accuracy (1-10) | Notes |
 |----------|----------------|-----------------|-------|
-| Clean Data (`processed_data.csv`) | (Ghi cau tra loi cua Agent) | | |
-| Garbage Data (`garbage_data.csv`) | (Ghi cau tra loi cua Agent) | | |
+| Clean Data (`processed_data.csv`) | Based on my data, the best choice is Laptop at $1200. | 10 | |
+| Garbage Data (`garbage_data.csv`) | Based on my data, the best choice is Nuclear Reactor at $999999. | 1 | |
 
 ---
 
@@ -21,10 +21,31 @@ Chay `agent_simulation.py` voi 2 bo du lieu va ghi lai ket qua:
 
 ### Tai sao Agent tra loi sai khi dung Garbage Data?
 
-(Viet nhan xet cua ban o day — it nhat 50 tu)
+#### Clean Data
 
-(Hay phan tich cac van de nhu Duplicate IDs, wrong data types, outliers, null values
-va giai thich tai sao chung anh huong den ket qua cua Agent.)
+- Agent chọn sản phẩm hợp lý
+- Giá trị nằm trong khoảng bình thường
+- Không bị ảnh hưởng bởi dữ liệu lỗi
+
+#### Garbage Data
+
+- Agent bị ảnh hưởng bởi outlier (giá cực lớn)
+- Không phát hiện dữ liệu bất thường
+- Quyết định không thực tế
+
+#### Phân tích vấn đề
+Các lỗi trong garbage data:
+
+- Duplicate ID
+- Sai kiểu dữ liệu ("ten dollars")
+- Giá trị cực đoan (999999)
+- Null values
+
+Agent không có cơ chế:
+
+- Kiểm tra outlier
+- Validate kiểu dữ liệu
+- Xử lý missing values
 
 ---
 
@@ -32,4 +53,12 @@ va giai thich tai sao chung anh huong den ket qua cua Agent.)
 
 **Quality Data > Quality Prompt?** (Dong y hay khong? Giai thich ngan gon.)
 
-(Viet ket luan cua ban o day)
+- Data Quality ảnh hưởng trực tiếp đến AI output
+- Garbage data có thể dẫn đến quyết định sai nghiêm trọng
+- ETL pipeline và validation là bắt buộc trước khi dùng AI
+
+## Đề xuất cải thiện
+- Thêm kiểm tra outlier (ví dụ: giá > ngưỡng hợp lý)
+- Validate kiểu dữ liệu (price phải là số)
+- Loại bỏ duplicate
+- Xử lý missing values
